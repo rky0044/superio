@@ -17,15 +17,15 @@ const Home = () => {
         <>
          <div className="page-wrapper">
                 <Header />
-                <BannerSection />
+               <BannerSection />
                 <JobCategories />
                 <JobSection />
                 <TestimonialSection />
-                <ClientsSection />
-                <AboutSection />
+                 <ClientsSection />
+                 <AboutSection />
                 <NewsSection />
                 <AppSection />
-                <CallToAction />
+               <CallToAction />
                 <Footer />
             </div>
         </>
