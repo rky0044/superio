@@ -221,7 +221,7 @@ const Header =()=>{
                         <a href="candidate-dashboard-cv-manager.html" className="upload-cv"> Upload your CV</a>
 
                         <div className="btn-box">
-                            <a href="login-popup.html" className="theme-btn btn-style-three call-modal">Login / Register</a>
+                            <a href="/login" className="theme-btn btn-style-three call-modal">Login / Register</a>
                             <a href="dashboard-post-job.html" className="theme-btn btn-style-one">Job Post</a>
                         </div>
                     </div>
