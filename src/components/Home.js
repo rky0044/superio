@@ -5,6 +5,7 @@ import Footer from './Footer';
 import BannerSection from './BannerSection';
 import JobCategories from './JobCategories';
 import JobSection from './JobSection';
+import TestimonialSection from './TestimonialSection'
 
 const Home = () => {
     return (
@@ -14,6 +15,7 @@ const Home = () => {
                 <BannerSection />
                 <JobCategories />
                 <JobSection />
+                <TestimonialSection />
                 <Footer />
             </div>
         </>
