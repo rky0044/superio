@@ -1,6 +1,20 @@
-import React from 'react';
+import React,{useState} from 'react';
+import { useDispatch } from 'react-redux';
+import { signInUser } from '../redux/authSlice'; 
+
 
 const Login = () => {
+
+    const [username,setUsername] = useState("");
+    const [password,setPassword] = useState("");
+    const[device_id,setdevice_id]=useState("1");
+    const dispatch = useDispatch();
+
+    const handalLogin = ()=>{
+        console.log(username,password,device_id);
+        dispatch(signInUser({username,password,device_id}))
+    }
+
     return (
         <>
             <div className="login-section">
@@ -11,31 +25,31 @@ const Login = () => {
                             <div className="form-inner">
                                 <h3>Login to Superio</h3>
 
-                                <form method="post" action="add-parcel.html">
+                               
                                     <div className="form-group">
                                         <label>Username</label>
-                                        <input type="text" name="username" placeholder="Username" required />
+                                        <input type="text" name="username" placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)} required />
                                     </div>
 
                                     <div className="form-group">
                                         <label>Password</label>
-                                        <input id="password-field" type="password" name="password" value="" placeholder="Password" />
+                                        <input id="password-field" type="password" name="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Password" />
                                     </div>
 
                                     <div className="form-group">
                                         <div className="field-outer">
                                             <div className="input-group checkboxes square">
                                                 <input type="checkbox" name="remember-me" value="" id="remember" />
-                                                <label for="remember" className="remember"><span className="custom-checkbox"></span> Remember me</label>
+                                                <label htmlFor="remember" className="remember"><span className="custom-checkbox"></span> Remember me</label>
                                             </div>
                                             <a href="#" className="pwd">Forgot password?</a>
                                         </div>
                                     </div>
 
                                     <div className="form-group">
-                                        <button className="theme-btn btn-style-one" type="submit" name="log-in">Log In</button>
+                                        <button className="theme-btn btn-style-one" onClick={handalLogin}  name="log-in">Log In</button>
                                     </div>
-                                </form>
+                               
 
                                 <div className="bottom-box">
                                     <div className="text">Don't have an account? <a href="register.html">Signup</a></div>
