@@ -1,74 +1,66 @@
-import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
-    msg:"",
-    user:"",
-    token:"",
-    loding:false,
-    error:"",
-    device_id:""
+    user: "",
+    token: "",
+    loding: false,
+    error: ""
+
 }
 
-export const signInUser = createAsyncThunk('signinuser',async(body)=>{
-    const res = await fetch("https://virvit.mydevpartner.website/vvapi/v1/login/",{
-        method:"POST",
-        headers:{
-            'Content-Type':'application/json',
+export const loginUser = createAsyncThunk('user', async (body) => {
+    const res = await fetch("https://virvit.mydevpartner.website/vvapi/v1/login/", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: localStorage.getItem('token')
         },
         body: JSON.stringify(body)
     })
     return await res.json();
+
+
+
 })
 
 const authSlice = createSlice({
-    name:'user',
+    name: "user",
     initialState,
-    reducers:{
+    reducers: {
         addToken:(state,action)=>{
             state.token=localStorage.getItem("token")
         },
         addUser:(state,action)=>{
             state.user=localStorage.getItem("user")
-        },
-        logout:(state,action)=>{
-            state.token=null;
-            localStorage.clear()
+
         }
+
 
     },
-    extraReducers:{
+    extraReducers: {
         //***********login*********** */
-        [signInUser.pending]:(state,action)=>{
-            state.loding=true;
-           
+        [loginUser.pending]:(state,action)=>{
+            state.loding=true
         },
-        [signInUser.fulfilled]:(state,{payload:{error,msg,token,user,device_id}})=>{
-            state.loading=false;
-            if(error){
-                state.error=error;
-            }else{
-                state.msg=msg;
-                state.token=token;
-                state.user=user;
-                state.device_id=device_id;
-
-                localStorage.setItem('msg',msg);
-                localStorage.setItem('user',JSON.stringify(user));
-                localStorage.setItem('token',token);
+        [loginUser.fulfilled]:(state,payload)=>{
+           console.log(payload,"pplllloooadd")
+            state.loding=false;
+               state.token=payload.payload.token;
+               state.user = payload.payload;
+               localStorage.setItem("token",JSON.stringify(payload.payload.token));
+               localStorage.setItem("user",JSON.stringify(payload.payload));
 
 
-            }
-           
         },
-        [signInUser.rejected]:(state,action)=>{
-            state.loading=true;
-        }
+        [loginUser.rejected]:(state,action)=>{
+            state.loding=true
+        },
 
 
 
     }
 });
 
-export const{addToken,addUser,logout}=authSlice.actions;
+export const { addToken, addUser } = authSlice.actions;
 
 export default authSlice.reducer;

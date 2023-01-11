@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { useDispatch } from 'react-redux';
-import { signInUser } from '../redux/authSlice'; 
+import { loginUser } from '../redux/authSlice'; 
 
 
 const Login = () => {
@@ -12,7 +12,7 @@ const Login = () => {
 
     const handalLogin = ()=>{
         console.log(username,password,device_id);
-        dispatch(signInUser({username,password,device_id}))
+        dispatch(loginUser({username,password,device_id}))
     }
 
     return (
