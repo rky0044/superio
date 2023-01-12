@@ -3242,7 +3242,7 @@ Dashboard
 
 .dashboard .dashboard-outer {
   position: relative;
-  padding: 60px 60px 0;
+  padding: 138px 60px 0 !important;
 }
 
 .dashboard .upper-title-box {
