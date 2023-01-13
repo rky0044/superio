@@ -5,10 +5,6 @@ import Home from "./components/Home";
 import Login from './components/Login';
 import Dashboard from './components/candidate/Dashboard';
 
-
-
-
-
 function App() {
   return (
   <>

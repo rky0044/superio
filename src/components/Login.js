@@ -1,21 +1,13 @@
-import React,{useState} from 'react';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '../redux/authSlice'; 
+import React from 'react';
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { getUserAsync,getUser,showUser } from '../features/login/loginSlice';
 
 
 const Login = () => {
 
-    const [username,setUsername] = useState("");
-    const [password,setPassword] = useState("");
-    const[device_id,setdevice_id]=useState("1");
-    const dispatch = useDispatch();
-
-    const handalLogin = ()=>{
-        console.log(username,password,device_id);
-        dispatch(loginUser({username,password,device_id}))
-    }
-
-    return (
+        return (
         <>
             <div className="login-section">
                 <div className="image-layer" style={{backgroundImage: `url(images/background/12.jpg)`}}></div>
@@ -28,12 +20,12 @@ const Login = () => {
                                
                                     <div className="form-group">
                                         <label>Username</label>
-                                        <input type="text" name="username" placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)} required />
+                                        <input type="text" name="username" placeholder="Username"  required />
                                     </div>
 
                                     <div className="form-group">
                                         <label>Password</label>
-                                        <input id="password-field" type="password" name="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Password" />
+                                        <input id="password-field" type="password" name="password"   placeholder="Password" />
                                     </div>
 
                                     <div className="form-group">
@@ -47,7 +39,7 @@ const Login = () => {
                                     </div>
 
                                     <div className="form-group">
-                                        <button className="theme-btn btn-style-one" onClick={handalLogin}  name="log-in">Log In</button>
+                                        <button className="theme-btn btn-style-one"  name="log-in">Log In</button>
                                     </div>
                                
 
