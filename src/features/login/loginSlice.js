@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-const axios = require("axios");
+// const axios = require("axios");
+import axios from "axios"; 
 const API_URL = "https://virvit.mydevpartner.website/vvapi/v1/login/";
 
 
 
 
 const initialState = {
-    user:"",
+    userData:"",
     loading:true,
     error:""
 }
@@ -16,22 +17,26 @@ export const loginslice = createSlice({
     initialState,
     reducers:{
         getUser:(state,action)=>{
-            state.user = action.payload;
+            state.userData = action.payload;
+        },
+        getUserLoginError:(state,action)=>{
+            console.log(action, 'error action ');
+            state.error = action.payload;
         }
     }
 });
 
-export const getUserAsync = (user)=> async(dispatch)=>{
+export const getUserAsync = (data)=> async(dispatch)=>{
     try{
-        const response = await axios.post(API_URL);
+        const response = await axios.post(API_URL,data);
+        console.log(response, '11111111111');
         dispatch(getUser(response.data));
-
     }catch (err) {
-        throw new Error(err);
+        console.log(err, 'errrrr');
+        dispatch(getUserLoginError(err.response ? err.response.data : err.message));
+        // throw new Error(err);
       }
 }
 
-export const {getUser} = loginslice.actions;
-export const showUser = (state) => state.user;
-
+export const {getUser, getUserLoginError} = loginslice.actions;
 export default loginslice.reducer;
