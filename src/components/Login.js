@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -10,9 +10,14 @@ const Login = () => {
     const dispatch = useDispatch();
     // const loginDone = useSelector(showUser);
     // const error = useSelector(showUserLoginError);
+    
     const { error, userData } = useSelector(
         (state) => state.logedUser
       );
+      
+    useEffect(()=>{
+        setLoginError(error.detail)
+     },[error]);
 
     console.log(error, 'errrorororo');
     console.log(userData, 'loginDone');
@@ -90,6 +95,7 @@ const Login = () => {
 
                                         <div className="form-group">
                                             <button className="theme-btn btn-style-one" type='submit' name="log-in">Log In</button>
+                                            <p style={{fontSize:"12px",color:'red'}}>{loginError}</p>
                                         </div>
                                 
 
