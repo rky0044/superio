@@ -1,12 +1,33 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const UserDashboard = () => {
+
+    const [jobs,setJobs] = useState("");
+
+    useEffect(()=>{
+     axios.get("https://virvit.mydevpartner.website/vvapi/v1/jobs/").then((response)=>{
+        console.log(jobs,"user deashnoard")
+         setJobs(response.data.results);
+
+     })
+ 
+    },[]);
+
+    let local
+    if (localStorage.getItem('loginUser')) {
+        local = JSON.parse(window.localStorage.getItem('loginUser') || "");
+    }
+
+
+
+
     return (
         <>
             <section className="user-dashboard">
                 <div className="dashboard-outer">
                     <div className="upper-title-box">
-                        <h3>Howdy, Jerome!!</h3>
+                        <h3>{local.first_name} , {local.last_name}!!</h3>
                         <div className="text">Ready to jump back in?</div>
                     </div>
                     <div className="row">
@@ -27,7 +48,10 @@ const UserDashboard = () => {
                                     <i className="icon la la-file-invoice"></i>
                                 </div>
                                 <div className="right">
-                                    <h4>9382</h4>
+                                    {
+                                      <h4>{jobs.length}</h4>
+                                    }   
+                                  
                                     <p>Job Alerts</p>
                                 </div>
                             </div>

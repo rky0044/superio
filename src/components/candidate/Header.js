@@ -1,7 +1,20 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+    let local
+    if (localStorage.getItem('loginUser')) {
+        local = JSON.parse(window.localStorage.getItem('loginUser') || "");
+    }
+    const  navigate = useNavigate();
+    const handalLogout = ()=>{
 
+        console.log("logouttt");
+        localStorage.removeItem("loginUser");
+        localStorage.removeItem("token");
+        navigate("/")
+
+    } 
     return (
         <>
             <header className="main-header header-shaddow">
@@ -229,7 +242,7 @@ const Header = () => {
                             <div className="dropdown dashboard-option">
                                 <a className="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
                                     <img src="images/resource/company-6.png" alt="avatar" className="thumb" />
-                                    <span className="name">My Account</span>
+                                    <span className="name">{local.fullname}</span>
                                 </a>
                                 <ul className="dropdown-menu">
                                     <li className="active"><a href="candidate-dashboard.html"> <i className="la la-home"></i> Dashboard</a></li>
@@ -243,7 +256,7 @@ const Header = () => {
                                     <li><a href="dashboard-messages.html"><i className="la la-comment-o"></i>Messages</a></li>
                                     <li><a href="dashboard-change-password.html"><i className="la la-lock"></i>Change Password</a></li>
                                     <li><a href="dashboard-profile.html"><i className="la la-user-alt"></i>View Profile</a></li>
-                                    <li><a href="index.html"><i className="la la-sign-out"></i>Logout</a></li>
+                                    <li><a href="#" onClick={handalLogout}><i className="la la-sign-out"></i>Logout</a></li>
                                     <li><a href="dashboard-delete.html"><i className="la la-trash"></i>Delete Profile</a></li>
                                 </ul>
                             </div>

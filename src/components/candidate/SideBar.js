@@ -1,6 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const SideBar = () => {
+  const  navigate = useNavigate();
+    const handalLogout = ()=>{
+
+        console.log("logouttt");
+        localStorage.removeItem("loginUser");
+        localStorage.removeItem("token");
+        navigate("/")
+
+    } 
     return (
         <>
             <div className="user-sidebar">
@@ -18,7 +29,7 @@ const SideBar = () => {
                         <li><a href="dashboard-messages.html"><i className="la la-comment-o"></i>Messages</a></li>
                         <li><a href="dashboard-change-password.html"><i className="la la-lock"></i>Change Password</a></li>
                         <li><a href="dashboard-profile.html"><i className="la la-user-alt"></i>View Profile</a></li>
-                        <li><a href="index.html"><i className="la la-sign-out"></i>Logout</a></li>
+                        <li><a href="#" onClick={handalLogout}><i className="la la-sign-out"></i>Logout</a></li>
                         <li><a href="dashboard-delete.html"><i className="la la-trash"></i>Delete Profile</a></li>
                     </ul>
 
