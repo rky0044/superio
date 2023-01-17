@@ -6,8 +6,10 @@ import Login from './components/Login';
 import Dashboard from './components/candidate/Dashboard';
 import ChangePassword from './components/candidate/ChangePassword';
 import ForgetPassword from './components/ForgetPassword';
+import Profile from './components/candidate/Profile';
 
 function App() {
+ 
   return (
   <>
    <BrowserRouter>
@@ -25,6 +27,9 @@ function App() {
         </Routes>
         <Routes>
           <Route path='/forgetpassword'element={<ForgetPassword />}/>
+        </Routes>
+        <Routes>
+          <Route path='/profile'element={<Profile />}/>
         </Routes>
       </BrowserRouter>
   </>
